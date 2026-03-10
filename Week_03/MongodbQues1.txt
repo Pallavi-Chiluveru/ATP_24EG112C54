@@ -1,0 +1,41 @@
+Structure
+
+       {
+              empId:"",
+              name:"",
+              skills:[],
+              experiences:[
+                     {
+                            companyName:",
+                            yearsOfExp:"
+                     }
+              ]
+       }
+
+
+Task-1
+database_name:mydb
+
+A.Create employees collection 
+db.createCollection("employees")
+
+
+B.Insert 5 emp documents with given structure 
+db.employees.insertOne({empId:1,name:"pallavi",skills:["java","react","html","css","js"],experiences:[{companyName:"google",yearsOfExp:3}]})
+db.employees.insertOne({empId:2,name:"padmaja",skills:["html","css","js"],experiences:[{companyName:"microsoft",yearsOfExp:1}]})
+db.employees.insertOne({empId:3,name:"manasa",skills:["java","react","mondodb"],experiences:[{companyName:"google",yearsOfExp:2}]})
+db.employees.insertOne({empId:4,name:"vikas",skills:["java","react"],experiences:[{companyName:"cisco",yearsOfExp:4}]})
+db.employees.insertOne({empId:5,name:"girish",skills:["java","react","python","c","c++","html","css","js"],experiences:[{companyName:"acenture",yearsOfExp:3}]})
+
+
+
+1.Find emps with React skill
+  db.employees.find({skills:"react"})
+2.Add new skills "Express"
+  db.employees.updateMany({},{$push:{skills:"express"}})
+3.Add new experince
+  db.employees.updateMany({},{$set:{"experiences.$[].noOfCompanies":1}})
+4.Delete first experince
+  db.employees.updateMany({},{$unset:{"experiences.0.companyName":""}})
+5.Add address to emp whose name is "vikas"
+  db.employees.updateOne({name:"vikas"},{$set:{address:[{city: "Hyderabad", state: "Telangana",pincode:500067}]}})
