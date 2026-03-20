@@ -1,0 +1,34 @@
+## read products
+GET http://localhost:4000/product-api/products
+
+
+### read product by brand
+GET http://localhost:4000/product-api/products/brand/MSI
+
+
+### create product
+POST http://localhost:4000/product-api/products
+Content-Type: application/json
+
+{
+    "productId":1,
+    "productName":"laptop",
+    "price":45000,
+    "brand":"MSI"
+}
+
+
+### update product
+PUT http://localhost:4000/product-api/products/69b15fb8ac9f3071e063b762
+Content-Type: application/json
+
+{
+    "productId":1,
+    "productName":"mobile",
+    "price":4556,
+    "brand":"MSI"
+}
+
+
+### delete product by id
+DELETE http://localhost:4000/product-api/products/69b15ef2ac9f3071e063b75f

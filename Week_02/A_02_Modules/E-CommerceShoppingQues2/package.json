@@ -1,0 +1,11 @@
+
+{
+  "name": "ecommerce-shopping",
+  "version": "1.0.0",
+  "type": "module",
+  "main": "app.js",
+  "dependencies": {
+    "express": "^5.2.1",
+    "init": "^0.1.2"
+  }
+}
