@@ -1,0 +1,73 @@
+/* RESET */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
+}
+
+/* BODY */
+body {
+  background: #111;
+}
+
+/* TOP BAR */
+.topbar {
+  background: #eee;
+  padding: 10px 50px;
+  font-size: 14px;
+  color: red;
+}
+
+/* HERO */
+.hero {
+  background: #e60000;
+  padding: 60px 50px;
+  color: white;
+}
+
+.hero-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.hero h1 {
+  font-size: 40px;
+  margin-bottom: 15px;
+}
+
+.hero p {
+  max-width: 400px;
+}
+
+/* LOGO */
+.logo {
+  font-size: 80px;
+}
+
+/* CARDS */
+.cards {
+  display: flex;
+}
+
+.card {
+  flex: 1;
+  padding: 40px;
+  background: #7a0000;
+  color: white;
+  border-right: 2px solid red;
+}
+
+.card:last-child {
+  border-right: none;
+}
+
+.card h3 {
+  margin-bottom: 15px;
+}
+
+.card p {
+  font-size: 14px;
+  line-height: 1.5;
+}

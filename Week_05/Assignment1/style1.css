@@ -1,0 +1,23 @@
+
+ table{
+    width:80%;
+    margin:auto;
+    margin-top: 100px;
+     border-collapse: collapse;
+    text-align: center;
+     border:5px solid black;
+ }
+ th,td{
+     border:2px solid black;
+    padding: 20px;
+  
+    border-top: none;
+    border-bottom: none;
+}
+.sub1{
+    border:2px solid black;
+}
+.sub2{
+    border:2px solid black;
+}
+

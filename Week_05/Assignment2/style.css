@@ -1,0 +1,40 @@
+
+.parent {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    padding: 60px;
+    background: linear-gradient( #e6eef5, #dfe9f3);
+}
+
+
+.parent div {
+    width: 250px;
+    background: #fff;
+    padding: 25px;
+    border-radius: 15px;
+    text-align: center;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+    transition: 0.3s;
+}
+
+
+.parent div:hover {
+    transform: translateY(-10px);
+}
+
+
+.parent img {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 15px;
+}
+
+
+.parent p {
+    font-size: 14px;
+    color: #555;
+    line-height: 1.5;
+}
