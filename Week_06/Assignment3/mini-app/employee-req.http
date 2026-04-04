@@ -1,0 +1,36 @@
+POST http://localhost:5000/employees
+Content-Type: application/json
+
+{
+    "name":"pallavi",
+    "email":"pallavi@gmail.com",
+    "designation":"software engineer",
+    "mobile":"6304922090",
+    "companyName":"google"
+}
+
+###
+GET http://localhost:5000/employees
+
+
+###
+GET http://localhost:5000/employees/69ca2770d0df52f83468d4aa
+
+###
+PUT http://localhost:5000/employees/69ca2770d0df52f83468d4aa
+Content-Type: application/json
+
+{
+    "name":"manasa",
+    "email":"manasa@gmail.com",
+    "designation":"Full-stack developer",
+    "mobile":"3456789709",
+    "companyName":"microsoft"
+}
+
+###
+DELETE http://localhost:5000/employees/69ca2770d0df52f83468d4aa
+
+
+employe name 
+employee number email anf 
