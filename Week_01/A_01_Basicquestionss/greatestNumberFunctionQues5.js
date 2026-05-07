@@ -1,15 +1,14 @@
-//write a function that receives 3 number args and return the big number 
-function greatestNumber(c,d,e)
-{
-    if(c>d && c>e )
-    return c;
-    else if(d>c && d>e )
-    return d;
-    else if(e>d && e>c )
-    return e;
+//greatest number in array using function
+let arr = [78, 82, 91, 89, 50, 30];
 
- 
+function findGreatest(arr) {
+    let greatest = arr[0];
+    for (let i = 1; i < arr.length; i++) {
+        if (arr[i] > greatest) {
+            greatest = arr[i];
+        }
+    }
+    return greatest;
 }
 
-let great=greatestNumber(10,20,30)
- console.log(`${great} is greatest number`)
+console.log("Greatest number in the array is " + findGreatest(arr));

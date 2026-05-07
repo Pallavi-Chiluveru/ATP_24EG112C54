@@ -1,17 +1,17 @@
-/*write  a function that receives an array and search an element as args 
-and returns the index of that search element in the array .
-  It should return "not found " when search element not found*/
-
- function findIndex(arr,search)
- {
-  for(let i=0;i<arr.length;i++){
-    if(arr[i]==search){
-      return `Index of search element ${arr[i]} is ${i} `;
+//search element index in array
+let arr = [78, 82, 91,89,50,30]
+let elementToSearch = 89
+let index = -1
+for(let i=0; i<arr.length; i++)
+{
+    if(arr[i] === elementToSearch)
+    {
+        index = i
+        break
     }
-  }
-  return "not found";
- }
- let arr = [10,20,30,40,50]
- let search = 50
- let ans = findIndex(arr,search)
- console.log(ans)
+}
+if(index !== -1)
+console.log("Element " + elementToSearch + " found at index " + index)  
+else
+console.log("Element " + elementToSearch + " not found in the array")
+    

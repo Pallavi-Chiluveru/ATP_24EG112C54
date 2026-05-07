@@ -1,13 +1,10 @@
-//Write a function that receives an array as arg and return their sum 
+//sum of array function
+let arr = [78, 82, 91,89,45,30]
+function sumOfArray(arr) {
+    let sum = 0
+    for(let i=0; i<arr.length; i++)
+    sum = sum + arr[i]
 
-function Sum(arr)
-{    let s=0;
-    for(let i=0;i<arr.length;i++)
-    s=s+arr[i];
- return s;
-
+    return sum
 }
-
-let a=[10,20,30,40]
-let result=Sum(a)
- console.log(result)
+console.log("Sum of array is " + sumOfArray(arr))
