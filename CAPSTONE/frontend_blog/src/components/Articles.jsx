@@ -36,43 +36,66 @@ function Articles() {
   if (error) return <div className="text-center py-20 text-red-500">{error}</div>;
 
   return (
-    <div className={pageWrapper}>
-      <h1 className={`${pageTitleClass} mb-12`}>Discover Articles</h1>
+    <div className={`${pageWrapper} bg-white`}>
+      <div className="mb-16">
+        <h1 className={`${pageTitleClass} bg-gradient-to-r from-slate-900 to-indigo-700 bg-clip-text text-transparent`}>
+          Discover Articles
+        </h1>
+        <p className="mt-4 text-lg text-slate-600 max-w-2xl">
+          Explore the latest stories, insights, and knowledge shared by our community of writers.
+        </p>
+      </div>
 
       {articles.length === 0 ? (
-        <p className="text-center text-gray-500 py-10">No articles available at the moment.</p>
+        <div className="text-center py-24 bg-slate-50 rounded-3xl border-2 border-dashed border-slate-200">
+          <p className="text-slate-500 text-lg">No articles available at the moment.</p>
+        </div>
       ) : (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
           {articles.map((article) => (
-            <div key={article._id} className="bg-[#f5f5f7] rounded-3xl p-8 hover:bg-[#e8e8ed] transition-colors flex flex-col justify-between">
-              <div>
-                <span className="text-[#0066cc] uppercase tracking-widest text-xs font-bold mb-3 block">
-                  {article.category}
-                </span>
-                <h3 className="text-2xl font-bold text-[#1d1d1f] mb-4 leading-tight">
+            <div 
+              key={article._id} 
+              className="group bg-white rounded-3xl overflow-hidden border border-slate-100 shadow-sm hover:shadow-xl transition-all duration-500 flex flex-col transform hover:-translate-y-2"
+            >
+              <div className="p-8 flex flex-col flex-grow">
+                <div className="flex items-center gap-2 mb-4">
+                  <span className="px-3 py-1 rounded-full bg-indigo-50 text-indigo-600 text-[10px] font-bold uppercase tracking-wider">
+                    {article.category}
+                  </span>
+                </div>
+                <h3 className="text-2xl font-bold text-slate-900 mb-4 leading-tight group-hover:text-indigo-600 transition-colors">
                   {article.title}
                 </h3>
-                <p className="text-[#6e6e73] mb-6 line-clamp-3 leading-relaxed">
+                <p className="text-slate-600 mb-6 line-clamp-3 leading-relaxed flex-grow">
                   {article.content}
                 </p>
-              </div>
-
-              <div className="pt-4 border-t border-[#d2d2d7]/50 flex justify-between items-center">
-                <span className="text-sm font-medium text-[#1d1d1f]">
-                  By {article.author?.firstName || "Author"}
-                </span>
-                <Link
-                  to={`/article/${article._id}`}
-                  className="bg-white text-[#0066cc] text-sm font-semibold px-4 py-2 rounded-full hover:bg-[#0066cc] hover:text-white transition-colors"
-                >
-                  Read →
-                </Link>
+                
+                <div className="mt-auto pt-6 border-t border-slate-100 flex justify-between items-center">
+                  <div className="flex items-center gap-3">
+                    <div className="w-8 h-8 rounded-full bg-indigo-100 flex items-center justify-center text-indigo-600 font-bold text-xs">
+                      {article.author?.firstName?.charAt(0) || "A"}
+                    </div>
+                    <span className="text-sm font-semibold text-slate-700">
+                      {article.author?.firstName || "Author"}
+                    </span>
+                  </div>
+                  <Link
+                    to={`/article/${article._id}`}
+                    className="inline-flex items-center text-sm font-bold text-indigo-600 hover:text-indigo-500 transition-colors"
+                  >
+                    Read More 
+                    <svg className="w-4 h-4 ml-1 transform group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                    </svg>
+                  </Link>
+                </div>
               </div>
             </div>
           ))}
         </div>
       )}
     </div>
+
   );
 }
 

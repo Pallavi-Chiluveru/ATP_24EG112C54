@@ -153,9 +153,9 @@ function Register() {
               placeholder="you@example.com"
               {...register("email", {
                 required: "Email is required",
-                required: [true, "Password is required"],
               })}
             />
+
             {errors.email && <p className={errorClass}>{errors.email.message}</p>}
           </div>
 
