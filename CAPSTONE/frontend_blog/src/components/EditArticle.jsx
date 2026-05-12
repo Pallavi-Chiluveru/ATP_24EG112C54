@@ -42,7 +42,7 @@ function EditArticle() {
     //add articleid to modifiied  article
     modifiedArticle._id = article._id;
     //make PUT reqq to update article
-    let res = await axios.put(`${import.meta.env.VITE_BACKEND_URL}/articles`, modifiedArticle);
+    let res = await axios.put(`${import.meta.env.VITE_BACKEND_URL}/author/articles`, modifiedArticle, { withCredentials: true });
     console.log(res.data);
     //navigate to articleid component
     navigate(`/article/${article._id}`, { state: res.data });
