@@ -7,7 +7,7 @@ export const userApp = exp.Router()
 
 
 //Read all articles(protected route)
-userApp.get("/articles", verifyToken("USER", "AUTHOR"), async (req, res) => {
+userApp.get("/articles", verifyToken("USER", "AUTHOR", "ADMIN"), async (req, res) => {
   //read articles of all authors which are active
   const articles = await ArticleModel.find({ isArticleActive: true }).populate("author").populate("comments.user");
   //send res

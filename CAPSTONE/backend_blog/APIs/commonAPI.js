@@ -21,6 +21,11 @@ commonApp.post("/users", upload.single("profileImageUrl"), async (req, res) => {
     if (req.file) {
         newUser.profileImageUrl = req.file.path;
     }
+    
+    // Normalize email to lowercase to prevent duplicates with different cases
+    if (newUser.email) {
+        newUser.email = newUser.email.toLowerCase();
+    }
     //check role
     if (!newUser.role || !allowedRoles.includes(newUser.role.toUpperCase())) {
         return res.status(400).json({ message: "Invalid role" })
@@ -28,7 +33,7 @@ commonApp.post("/users", upload.single("profileImageUrl"), async (req, res) => {
     //check if user already exists
     const existingUser = await UserModel.findOne({ email: newUser.email })
     if (existingUser) {
-        return res.status(409).json({ message: "User already exists" })
+        return res.status(409).json({ message: "A user with this email address already exists. Please login." })
     }
     let cloudinaryReslt;
 //upload image to cloudinary from memory storage
@@ -57,7 +62,9 @@ if(cloudinaryReslt){
 // route for login
 commonApp.post("/login", async (req, res) => {
     //get user cred obj
-    const { email, password } = req.body
+    let { email, password } = req.body
+    if (email) email = email.toLowerCase()
+    
     //find user bt email
     const user = await UserModel.findOne({ email: email })
     //if user not found

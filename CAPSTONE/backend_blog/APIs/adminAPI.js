@@ -1,6 +1,7 @@
 import exp from 'express'
 import { verifyToken } from '../middlewares/verifyToken.js'
 import { UserModel } from '../models/userModel.js'
+import { ArticleModel } from '../models/articleModel.js'
 
 export const adminApp = exp.Router()
 
@@ -24,14 +25,14 @@ adminApp.get("/article", verifyToken("ADMIN"), async (req, res) => {
 //block user
 adminApp.put("/user/:id", verifyToken("ADMIN"), async (req, res) => {
     const { id } = req.params
-    const user = await UserModel.findByIdAndUpdate(id, { isUserActive: false })
+    const user = await UserModel.findByIdAndUpdate(id, { isUserActive: false }, { new: true })
     res.status(200).json({ message: "User blocked successfully", payload: user })
 })
 
 //unblock user
 adminApp.put("/user-unblock/:id", verifyToken("ADMIN"), async (req, res) => {
     const { id } = req.params
-    const user = await UserModel.findByIdAndUpdate(id, { isUserActive: true })
+    const user = await UserModel.findByIdAndUpdate(id, { isUserActive: true }, { new: true })
     res.status(200).json({ message: "User unblocked successfully", payload: user })
 
 })

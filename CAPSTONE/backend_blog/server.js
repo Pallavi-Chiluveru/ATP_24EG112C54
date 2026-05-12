@@ -57,11 +57,11 @@ app.use((err, req, res, next) => {
   console.log("Full error:", JSON.stringify(err, null, 2));
   //ValidationError
   if (err.name === "ValidationError") {
-    return res.status(400).json({ message: "error occurred", error: err.message });
+    return res.status(400).json({ message: err.message, error: err.message });
   }
   //CastError
   if (err.name === "CastError") {
-    return res.status(400).json({ message: "error occurred", error: err.message });
+    return res.status(400).json({ message: "Invalid ID format", error: err.message });
   }
   const errCode = err.code ?? err.cause?.code ?? err.errorResponse?.code;
   const keyValue = err.keyValue ?? err.cause?.keyValue ?? err.errorResponse?.keyValue;
@@ -70,11 +70,11 @@ app.use((err, req, res, next) => {
     const field = Object.keys(keyValue)[0];
     const value = keyValue[field];
     return res.status(409).json({
-      message: "error occurred",
+      message: `The ${field} "${value}" is already in use. Please choose another one.`,
       error: `${field} "${value}" already exists`,
     });
   }
 
   //send server side error
-  res.status(500).json({ message: "error occurred", error: "Server side error" });
+  res.status(500).json({ message: "Internal server error", error: err.message });
 });

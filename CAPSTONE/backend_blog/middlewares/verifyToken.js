@@ -1,12 +1,12 @@
-
 import jwt from "jsonwebtoken"
 import { config } from "dotenv"
+import { UserModel } from "../models/userModel.js"
 const { verify } = jwt
 config()
 
 //it is a function which returns middleware
 export const verifyToken = (...allowedRoles) => {//verifyToken ("AUTHOR","USER","ADMIN")
-    return (req, res, next) => {
+    return async (req, res, next) => {
         try {
             //get token from cookie
             const token = req.cookies?.token //req.cookies is an object and token is variable we exactly used in commonAPI 
@@ -19,6 +19,15 @@ export const verifyToken = (...allowedRoles) => {//verifyToken ("AUTHOR","USER",
             //check role same as in decoded token 
             if (!allowedRoles.map(r => r.toUpperCase()).includes(decodedToken.role.toUpperCase())) {
                 return res.status(403).json({ message: "You're not authorized" })
+            }
+            
+            // Check if user is still active in the database
+            const userInDb = await UserModel.findById(decodedToken.id);
+            if (!userInDb) {
+                return res.status(401).json({ message: "User no longer exists" });
+            }
+            if (userInDb.isUserActive === false) {
+                return res.status(403).json({ message: "Your account has been blocked by the admin." });
             }
 
             ///add decoded token to req
