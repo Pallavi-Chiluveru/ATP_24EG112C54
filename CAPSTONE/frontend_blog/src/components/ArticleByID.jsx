@@ -146,7 +146,7 @@ function ArticleByID() {
           {article.category}
         </span>
 
-        <h1 className="text-[2.5rem] font-bold text-black uppercase leading-tight mb-8">
+        <h1 className="text-[2.5rem] font-bold text-black uppercase leading-tight mb-8 break-words">
           {article.title}
         </h1>
 
@@ -162,7 +162,7 @@ function ArticleByID() {
       </div>
 
       {/* Content */}
-      <div className="text-gray-700 text-[1.05rem] leading-[1.9] whitespace-pre-line mb-12">
+      <div className="text-gray-700 text-[1.05rem] leading-[1.9] whitespace-pre-line mb-12 break-words">
         {article.content}
       </div>
 

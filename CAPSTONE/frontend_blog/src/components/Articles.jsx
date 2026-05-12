@@ -63,10 +63,10 @@ function Articles() {
                     {article.category}
                   </span>
                 </div>
-                <h3 className="text-2xl font-bold text-slate-900 mb-4 leading-tight group-hover:text-indigo-600 transition-colors">
+                <h3 className="text-2xl font-bold text-slate-900 mb-4 leading-tight group-hover:text-indigo-600 transition-colors break-words">
                   {article.title}
                 </h3>
-                <p className="text-slate-600 mb-6 line-clamp-3 leading-relaxed flex-grow">
+                <p className="text-slate-600 mb-6 line-clamp-3 leading-relaxed flex-grow break-words">
                   {article.content}
                 </p>
                 

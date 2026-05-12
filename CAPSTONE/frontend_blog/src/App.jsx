@@ -63,7 +63,7 @@ function App() {
         },
         {
           path: "articles",
-          element: <Articles />,
+          element: <ProtectedRoute allowedRoles={["USER", "AUTHOR"]}><Articles /></ProtectedRoute>,
         },
         {
           path: "edit-article",

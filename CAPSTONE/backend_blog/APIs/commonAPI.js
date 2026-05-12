@@ -28,7 +28,7 @@ commonApp.post("/users", upload.single("profileImageUrl"), async (req, res) => {
     //check if user already exists
     const existingUser = await UserModel.findOne({ email: newUser.email })
     if (existingUser) {
-        return res.status(400).json({ message: "User already exists" })
+        return res.status(409).json({ message: "User already exists" })
     }
     let cloudinaryReslt;
 //upload image to cloudinary from memory storage
@@ -75,7 +75,7 @@ commonApp.post("/login", async (req, res) => {
 
 
     //create jwt
-    const signedToken = sign({id:user._id, email: email, role: user.role,firstName:user.firstName,lastName:user.lastName,profileImg:user.profileImg}, process.env.SECRET_KEY,{expiresIn:"1H"})
+    const signedToken = sign({ id: user._id, email: email, role: user.role, firstName: user.firstName, lastName: user.lastName, profileImageUrl: user.profileImageUrl }, process.env.SECRET_KEY, { expiresIn: "1H" })
 
     //set token in cookie
     res.cookie("token", signedToken, { httpOnly: true, secure: false, sameSite: "lax",maxAge:60*60*1000 })
@@ -101,13 +101,16 @@ commonApp.get("/check-auth",verifyToken("USER","AUTHOR","ADMIN"),async(req,res)=
     res.status(200).json({message:"authenticated",payload:req.user})
 })
 //change password
-commonApp.put("/password",verifyToken("USER","AUTHOR","ADMIN"),async(req,res)=>{
-    const {currentPassword,newPassword}=req.body
+commonApp.put("/password", verifyToken("USER", "AUTHOR", "ADMIN"), async (req, res) => {
+    const { currentPassword, newPassword } = req.body
     const user = await UserModel.findById(req.user?.id)
-    if(user.password !== await hash(currentPassword,12)){
-        return res.status(401).json({message:"Invalid current password"})
+    
+    const isMatched = await compare(currentPassword, user.password)
+    if (!isMatched) {
+        return res.status(401).json({ message: "Invalid current password" })
     }
-    user.password = await hash(newPassword,12)
+    
+    user.password = await hash(newPassword, 12)
     await user.save()
-    res.status(200).json({message:"Password changed successfully",payload:user})
+    res.status(200).json({ message: "Password changed successfully" })
 })

@@ -2,12 +2,12 @@ import exp from 'express'
 import {UserModel}  from '../models/userModel.js'
 import { ArticleModel } from "../models/articleModel.js";
 import { verifyToken } from "../middlewares/verifyToken.js";
-//import {hash,compare} from 'bcrypt'
+import { hash, compare } from 'bcryptjs'
 export const userApp = exp.Router()
 
 
 //Read all articles(protected route)
-userApp.get("/articles", verifyToken("USER"), async (req, res) => {
+userApp.get("/articles", verifyToken("USER", "AUTHOR"), async (req, res) => {
   //read articles of all authors which are active
   const articles = await ArticleModel.find({ isArticleActive: true }).populate("author").populate("comments.user");
   //send res
@@ -105,19 +105,16 @@ userApp.delete("/article/:articleId/comment/:commentId", verifyToken("USER"), as
 
 
 //change password
-userApp.put("/password",verifyToken("USER","ADMIN","AUTHOR"),async(req,res)=>{
-  //check current password and new password are same 
-  const {currentPassword,newPassword}=req.body
-  //get current paaword of user/admin/author
+userApp.put("/password", verifyToken("USER", "ADMIN", "AUTHOR"), async (req, res) => {
+  const { currentPassword, newPassword } = req.body
   const user = await UserModel.findById(req.user?.id)
-  //check the current password of the request and user are not same
-  if(user.password !== currentPassword){
-    return res.status(401).json({message:"Invalid current password"})
+  
+  const isMatched = await compare(currentPassword, user.password)
+  if (!isMatched) {
+    return res.status(401).json({ message: "Invalid current password" })
   }
-  //hash new password and replace the current password with hashenewpassword and save it and send response 
-  user.password = newPassword
+  
+  user.password = await hash(newPassword, 12)
   await user.save()
-  res.status(200).json({message:"Password changed successfully",payload:user})
-
-
+  res.status(200).json({ message: "Password changed successfully" })
 })

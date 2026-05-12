@@ -63,10 +63,10 @@ function AuthorArticles() {
               </div>
 
               {/* Title & Content */}
-              <h3 className="text-[1.1rem] font-bold text-gray-900 mb-2 leading-snug">
+              <h3 className="text-[1.1rem] font-bold text-gray-900 mb-2 leading-snug break-words">
                 {article.title}
               </h3>
-              <p className="text-gray-500 text-sm leading-relaxed mb-6 flex-grow">
+              <p className="text-gray-500 text-sm leading-relaxed mb-6 flex-grow break-words">
                 {article.content?.substring(0, 100)}...
               </p>
 
