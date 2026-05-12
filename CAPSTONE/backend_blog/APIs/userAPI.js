@@ -54,7 +54,7 @@ userApp.get("/article/:articleId", verifyToken("USER", "AUTHOR", "ADMIN"), async
 
 
 
-userApp.put("/articles",verifyToken("USER"),async(req,res)=>{
+userApp.put("/articles", verifyToken("USER", "AUTHOR"), async (req, res) => {
   //get the article and comment from the request body
   const {articleId,comment} = req.body
   //check article
@@ -80,7 +80,7 @@ userApp.put("/articles",verifyToken("USER"),async(req,res)=>{
 
 
 // Delete comment
-userApp.delete("/article/:articleId/comment/:commentId", verifyToken("USER"), async (req, res) => {
+userApp.delete("/article/:articleId/comment/:commentId", verifyToken("USER", "AUTHOR"), async (req, res) => {
   const { articleId, commentId } = req.params;
   const userId = req.user?.id;
 

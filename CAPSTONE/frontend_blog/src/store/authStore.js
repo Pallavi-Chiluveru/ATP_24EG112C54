@@ -6,6 +6,7 @@ export const useAuth = create(
   persist(
     (set) => ({
       currentUser: null,
+      token: null,
       loading: false,
       isAuthenticated: false,
       error: null,
@@ -19,7 +20,7 @@ export const useAuth = create(
           let res = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/auth/login`, userCredObj, { withCredentials: true })
           //update state
           if (res.status === 200) {
-            set(state => ({ ...state, loading: false, isAuthenticated: true, currentUser: res.data.payload, error: null }))
+            set(state => ({ ...state, loading: false, isAuthenticated: true, currentUser: res.data.payload, token: res.data.token, error: null }))
           }
         } catch (err) {
           console.log("err is ", err);
@@ -42,7 +43,7 @@ export const useAuth = create(
           let res = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/auth/logout`, { withCredentials: true })
           //update state
           if (res.status === 200) {
-            set(state => ({ ...state, loading: false, isAuthenticated: false, currentUser: null, error: null }))
+            set(state => ({ ...state, loading: false, isAuthenticated: false, currentUser: null, token: null, error: null }))
           }
         } catch (err) {
           set({

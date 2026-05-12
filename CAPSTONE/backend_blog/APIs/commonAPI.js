@@ -97,7 +97,7 @@ commonApp.post("/login", async (req, res) => {
 
 
     //send 
-    res.status(200).json({ message: "login successfull", payload: userObj, user: userObj })
+    res.status(200).json({ message: "login successfull", payload: userObj, user: userObj, token: signedToken })
 })
 
 //route for logout

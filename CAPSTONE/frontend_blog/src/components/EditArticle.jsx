@@ -39,8 +39,8 @@ function EditArticle() {
   }, [article]);
 
   const updateArticle = async (modifiedArticle) => {
-    //add articleid to modifiied  article
-    modifiedArticle._id = article._id;
+    //add articleId to modifiied article (backend expects articleId, not _id)
+    modifiedArticle.articleId = article._id;
     //make PUT reqq to update article
     let res = await axios.put(`${import.meta.env.VITE_BACKEND_URL}/author/articles`, modifiedArticle, { withCredentials: true });
     console.log(res.data);

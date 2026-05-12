@@ -8,8 +8,11 @@ config()
 export const verifyToken = (...allowedRoles) => {//verifyToken ("AUTHOR","USER","ADMIN")
     return async (req, res, next) => {
         try {
-            //get token from cookie
-            const token = req.cookies?.token //req.cookies is an object and token is variable we exactly used in commonAPI 
+            //get token from cookie or authorization header
+            let token = req.cookies?.token;
+            if (!token && req.headers.authorization?.startsWith("Bearer ")) {
+                token = req.headers.authorization.split(" ")[1];
+            }
             //check if token exists
             if (!token) {
                 return res.status(401).json({ message: "please login first" })
