@@ -1,4 +1,5 @@
 import React from 'react'
+import logoImg from '../assets/image.png'
 
 function Footer() {
   return (
@@ -6,9 +7,9 @@ function Footer() {
       <div className="container mx-auto px-6 py-12 lg:px-8">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-12">
           <div className="col-span-1 md:col-span-2">
-            <span className="text-2xl font-extrabold bg-gradient-to-r from-indigo-400 to-violet-400 bg-clip-text text-transparent">
-              BlogApp
-            </span>
+            <div className="mb-4">
+              <img src={logoImg} alt="InkFlow Logo" className="h-16 w-auto object-contain" />
+            </div>
             <p className="mt-4 text-slate-400 max-w-xs">
               A premium space for creators to share their thoughts and connect with a global audience.
             </p>
@@ -31,7 +32,7 @@ function Footer() {
           </div>
         </div>
         <div className="mt-12 pt-8 border-t border-slate-800 text-center text-sm text-slate-500">
-          <p>© {new Date().getFullYear()} BlogApp. All rights reserved.</p>
+          <p>© {new Date().getFullYear()} InkFlow. All rights reserved.</p>
         </div>
       </div>
     </footer>

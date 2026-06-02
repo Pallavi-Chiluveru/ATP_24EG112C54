@@ -14,7 +14,7 @@ cloudinary.config({
 const storage = new CloudinaryStorage({
   cloudinary: cloudinary,
   params: {
-    folder: 'blogapp_profiles',
+    folder: 'inkflow_profiles',
     allowedFormats: ['jpg', 'png', 'jpeg'], // Notice it's allowedFormats, not allowed_formats usually, though sometimes both work. Wait, the docs say allowedFormats
   },
 });

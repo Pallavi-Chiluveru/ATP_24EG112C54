@@ -80,6 +80,7 @@ function UserProfile() {
           {currentUser?.profileImageUrl ? (
             <img
               src={currentUser.profileImageUrl}
+              crossOrigin="anonymous"
               className="w-16 h-16 rounded-full object-cover border"
               alt="profile"
             />
@@ -122,6 +123,7 @@ function UserProfile() {
               {article.imageUrl && (
                 <img
                   src={article.imageUrl}
+                  crossOrigin="anonymous"
                   className="w-full h-40 object-cover rounded-2xl mb-4"
                   alt="article"
                 />

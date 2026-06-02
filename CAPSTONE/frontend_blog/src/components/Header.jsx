@@ -1,5 +1,6 @@
 import { NavLink, useNavigate } from "react-router";
 import { useAuth } from "../store/authStore";
+import logoImg from "../assets/image.png";
 
 function Header() {
   const { isAuthenticated, logout } = useAuth((state) => state);
@@ -19,12 +20,10 @@ function Header() {
   return (
     <header className="bg-white/80 backdrop-blur-md border-b border-slate-200 sticky top-0 z-50">
       <div className="w-full px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center h-16">
+        <div className="flex justify-between items-center py-2 min-h-[4rem]">
           {/* Logo Section */}
-          <div className="flex-shrink-0 flex items-center">
-            <span className="text-2xl font-extrabold bg-gradient-to-r from-indigo-600 to-violet-600 bg-clip-text text-transparent hover:scale-105 transition-transform duration-300 cursor-pointer">
-              BlogApp
-            </span>
+          <div className="flex-shrink-0 flex items-center cursor-pointer hover:scale-105 transition-transform duration-300">
+            <img src={logoImg} alt="InkFlow Logo" className="h-24 w-auto object-contain" />
           </div>
 
           {/* Navigation Links */}
@@ -32,7 +31,7 @@ function Header() {
             <NavLink to="/" className={linkStyles}>
               Home
             </NavLink>
-            
+
             {!isAuthenticated ? (
               <>
                 <NavLink to="/register" className={linkStyles}>
